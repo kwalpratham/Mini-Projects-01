@@ -1,0 +1,121 @@
+# write your code here
+# Showing coordinates system
+print('''Coordinate System
+-------------
+|1,3 2,3 3,3|
+|1,2 2,2 3,2|
+|1,1 2,1 3,1|
+-------------''')
+
+print('---------')
+l = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+x_c = l.count('X')
+o_c = l.count('O')
+counter = 0
+for i in range(0, 3):
+    print('| ', end='')
+    for j in range(0, 3):
+        print(l[counter], end=' ')
+        counter += 1
+    print('|') 
+print('---------')
+
+# Taking inputs
+coord = [1, 2, 3] 
+rounds = 0 # for deciding what to assign X or O
+
+while 1:
+    
+    mark = 0
+    a, b = input('Enter the coordinates: ').split()
+    try:
+        a1, b1 = int(a), int(b)
+    except ValueError:
+        print('You should enter numbers!')
+        continue
+    
+    for y in coord:
+        if a1 == y:
+            mark += 1
+        if b1 == y:
+            mark += 1     
+    if mark != 2:
+        print('Coordinates should be from 1 to 3!')
+        continue
+
+    if b1 == 3:
+        if l[a1 + b1 - 4] != ' ' and l[a1 + b1 - 4] != '_':
+            print('This cell is occupied! Choose another one!')
+            continue
+        if rounds % 2 == 0:
+            l[a1 + b1 - 4] = 'X'  
+        else:
+            l[a1 + b1 - 4] = 'O' 
+        rounds += 1
+    elif b1 == 2:
+        if l[a1 + b1] != ' ' and l[a1 + b1] != '_':
+            print('This cell is occupied! Choose another one!')
+            continue   
+        if rounds % 2 == 0:        
+            l[a1 + b1] = 'X' 
+        else:
+            l[a1 + b1] = 'O' 
+        rounds += 1
+    elif b1 == 1:
+        if l[a1 + b1 + 4] != ' ' and l[a1 + b1 + 4] != '_':
+            print('This cell is occupied! Choose another one!')
+            continue  
+        if rounds % 2 == 0:          
+            l[a1 + b1 + 4] = 'X' 
+        else:
+            l[a1 + b1 + 4] = 'O' 
+        rounds += 1 
+    counter = 0  
+    print('---------')  
+    for i in range(0, 3):
+        print('| ', end='')
+        for j in range(0, 3):
+            print(l[counter], end=' ')
+            counter += 1
+        print('|') 
+    print('---------')
+# Checking whether matrix is full    
+    flag0 = 1       
+    for i in range(9):
+        if l[i] == ' ' or l[i] == '_':
+            flag0 = 0
+    '''if flag0:
+        break'''    
+# Result printing
+    flag = 0
+# Row
+    for i in range(0, 9, 3):
+        if l[i]==l[i+1]==l[i+2]:
+            flag += 1 
+            a = l[i]
+# Column        
+    for i in range(0, 3):
+        if l[i]==l[i+3]==l[i+6]:
+            flag += 1
+            a = l[i]
+# Diagonal
+    if l[0]==l[4]==l[8] or l[2]==l[4]==l[6]:
+        flag += 1
+        a = l[4]
+# Result
+    '''count = 0    
+    for i in range(9):
+        if l[i] == ' ' or l[i] == '_':
+            count = 1  ''' 
+    if flag == 1 and a != ' ':
+        print(a + ' wins')
+        break
+ 
+    elif flag == 0 and flag0:
+        print('Draw') 
+        break
+'''elif flag > 1 or abs(x_c-o_c) > 1:
+      print('Impossible')  
+
+elif flag == 0 and count == 1:
+    print('Game not finished')  '''
